@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { WakaTimeClient } = require("wakatime-client");
-const { endOfYesterday, formatISO, format, parseISO } = require("date-fns");
+const { endOfYesterday, formatISO, format, parseISO, endOfToday} = require("date-fns");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 const private_key = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n");
@@ -13,7 +13,7 @@ const {
 const wakatime = new WakaTimeClient(wakatimeApiKey);
 const doc = new GoogleSpreadsheet(googleSheetId);
 const yesterday = formatISO(endOfYesterday(), {
-  // assuming the job is runnig on second day
+  // assuming the job is running on second day
   representation: "date",
 });
 const parsedDate = parseISO(yesterday);
@@ -26,7 +26,6 @@ async function main() {
   await initGoogleSheet();
   const { languages = [], projects = [] } = await getYesterdaySummary();
   await addProjectRows(projects);
-  await addLanguagesRows(languages);
 }
 
 async function getYesterdaySummary() {
@@ -58,30 +57,30 @@ async function addProjectRows(projects = []) {
   if (!projects.length) return;
   console.log("INIT: logging project data to google sheets");
   // append date in dd-MM-yyyy formate
-  const date = format(parsedDate, "dd-MM-yyyy");
+  const date = format(parsedDate, "yyyy-MM-dd");
   projects = projects.map((p) => Object.assign(p, { date, day }));
 
   // insert data to sheet
-  const sheet = doc.sheetsByIndex[0];
+  const sheet = doc.sheetsByTitle["Wakatime Projects"];
   await sheet.loadHeaderRow();
   await sheet.addRows(projects, { insert: true });
   console.log("COMPLETED: logging project data to google sheets");
 }
 
-async function addLanguagesRows(languages = []) {
-  console.log("INIT: logging langauges data to google sheets");
-  if (!languages.length) return;
-  // append date in dd-MM-yyyy formate
-  let parsedDate = parseISO(yesterday);
-  const date = format(parsedDate, "dd-MM-yyyy");
-  languages = languages.map((p) => Object.assign(p, { date, day }));
-
-  // insert data to sheet
-  const sheet = doc.sheetsByIndex[1];
-  await sheet.loadHeaderRow();
-  await sheet.addRows(languages, { insert: true });
-  console.log("COMPLETED: logging langauges data to google sheets");
-}
+// async function addLanguagesRows(languages = []) {
+//   console.log("INIT: logging languages data to google sheets");
+//   if (!languages.length) return;
+//   // append date in dd-MM-yyyy format
+//   let parsedDate = parseISO(yesterday);
+//   const date = format(parsedDate, "dd-MM-yyyy");
+//   languages = languages.map((p) => Object.assign(p, { date, day }));
+//
+//   // insert data to sheet
+//   const sheet = doc.sheetsByIndex[1];
+//   await sheet.loadHeaderRow();
+//   await sheet.addRows(languages, { insert: true });
+//   console.log("COMPLETED: logging languages data to google sheets");
+// }
 
 (async () => {
   await main();

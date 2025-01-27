@@ -1,11 +1,12 @@
 name: Log data to google sheet
 
 on:
-  push:
-    branches: master
+#  push:
+#    branches: master
+  workflow_dispatch:
 
   schedule:
-    - cron: "30 19 * * *" # 1am IST
+    - cron: "30 6 * * *" # 12:30 AM CENTRAL TIME
 
 jobs:
   log-data:
