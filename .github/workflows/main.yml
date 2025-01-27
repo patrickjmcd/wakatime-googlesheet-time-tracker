@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Install
-        run: npm ci
+        run: npm install
       - name: Fetch data from wakatime & log to google sheet
         run: node ./index.js
         env:
