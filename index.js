@@ -10,6 +10,8 @@ const {
   GOOGLE_SHEETS_ID: googleSheetId,
 } = process.env;
 
+console.log("private_key", private_key);
+
 const sheetName = process.env.SHEET_NAME || "Wakatime Time Raw";
 
 const serviceAccountAuth = new JWT({
