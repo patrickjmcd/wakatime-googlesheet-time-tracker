@@ -4,7 +4,9 @@ const { endOfYesterday, formatISO, format, parseISO, endOfToday} = require("date
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { JWT } = require('google-auth-library');
 
-const private_key = process.env.GOOGLE_PRIVATE_KEY;
+const base64Key = process.env.GOOGLE_PRIVATE_KEY_B64;
+const private_key = Buffer.from(base64Key, 'base64').toString('utf-8');
+
 const {
   WAKATIME_API_KEY: wakatimeApiKey,
   GOOGLE_SHEETS_ID: googleSheetId,
