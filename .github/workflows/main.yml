@@ -21,4 +21,5 @@ jobs:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.WAKATIME_API_KEY }}
           GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_PRIVATE_KEY_B64: ${{ secrets.GOOGLE_PRIVATE_KEY_B64 }}
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
