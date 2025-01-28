@@ -4,13 +4,11 @@ const { endOfYesterday, formatISO, format, parseISO, endOfToday} = require("date
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const { JWT } = require('google-auth-library');
 
-const private_key = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n");
+const private_key = process.env.GOOGLE_PRIVATE_KEY;
 const {
   WAKATIME_API_KEY: wakatimeApiKey,
   GOOGLE_SHEETS_ID: googleSheetId,
 } = process.env;
-
-console.log("private_key", private_key);
 
 const sheetName = process.env.SHEET_NAME || "Wakatime Time Raw";
 
