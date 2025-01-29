@@ -1,6 +1,6 @@
 # wakatime-googlesheet-time-tracker
 
-Automatically log daily project wise work hours to google sheet using wakatime API
+Automatically log daily project work hours to google sheet using wakatime API.
 
 
 ## Setup
@@ -16,3 +16,8 @@ Automatically log daily project wise work hours to google sheet using wakatime A
 9. Set all the environment variables as secrets in your GitHub repository.
 10. Adjust the cron schedule in the workflow file as per your timezone.
 11. Push the code to your GitHub repository.
+
+## Customization
+
+- the default sheet name is `Wakatime Time Raw`. This can be overwritten with the environment variable `SHEET_NAME`.
+- the default columns in the sheet are `Date`, `Project`, `Time (sec)`. These can be configured in the `makeProjectRows()` function in `src/index.ts`. 
