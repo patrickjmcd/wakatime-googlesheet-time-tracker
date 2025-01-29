@@ -16,10 +16,8 @@ jobs:
       - name: Install
         run: npm install
       - name: Fetch data from wakatime & log to google sheet
-        run: node ./index.js
+        run: npm run do-the-thing
         env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.WAKATIME_API_KEY }}
-          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
-          GOOGLE_PRIVATE_KEY_B64: ${{ secrets.GOOGLE_PRIVATE_KEY_B64 }}
+          GOOGLE_SA_B64: ${{ secrets.GOOGLE_SA_B64 }}
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
